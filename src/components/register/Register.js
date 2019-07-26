@@ -19,6 +19,8 @@ class Register extends React.Component {
         this.setState({registerPassword:event.target.value})
     }
     onSigninSubmit = () => {
+        if(this.state.registerName !== "" && this.state.registerEmail !== "" && this.state.registerPassword !== ""){
+            
         fetch('http://localhost:3000/register',{
             method:'post',
             headers:{"Content-Type":"application/json"},
@@ -37,6 +39,7 @@ class Register extends React.Component {
                 this.props.onRouteChange("home");
             }
         })
+        }
         
     }
     render(){

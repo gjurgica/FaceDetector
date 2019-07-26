@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import Particles from 'react-particles-js';
 import Clarifai from 'clarifai';
+import Particles from 'react-particles-js';
 import Navigation from './components/navigation/Navigation';
 import Logo from './components/logo/Logo';
 import ImageLinkForm from './components/imageLinkForm/ImageLinkForm';
@@ -10,9 +10,8 @@ import FaceRecognation from './components/faceRecognation/FaceRecognation'
 import './App.css';
 
 const app = new Clarifai.App({
-  apiKey: 'your api key'
+  apiKey: '149988723580434a89d0c2f1f113f4a9'
  });
-
 const particleOptions = {
   particles:{
     number:{
@@ -59,7 +58,6 @@ class App extends Component {
     const imageElement = document.getElementById("image");
     const width = Number(imageElement.width);
     const height = Number(imageElement.height);
-    console.log(width,height);
     return {
       leftCol: faces.left_col * width,
       topCol: faces.top_row *height,
@@ -69,7 +67,6 @@ class App extends Component {
   }
   displayBox = (box) => {
     this.setState({box:box});
-    console.log(box)
   }
   onRouteChange = (route) => {
     this.setState({route: route})
@@ -82,10 +79,10 @@ class App extends Component {
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL,
     this.state.input
-)
-.then((response) => {
-  if(response){
-    fetch('http://localhost:3000/image',{
+  )
+    .then((response) => {
+    if(response){
+      fetch('http://localhost:3000/image',{
           method:'put',
           headers:{"Content-Type":"application/json"},
           body:JSON.stringify({
